@@ -32,7 +32,7 @@ int main() {
 				if(q.size()!=0)
 					q.pop();
 				else
-				{
+				{ 
 					flag = 1;
 					break;
 				}
