@@ -23,7 +23,8 @@ int cnt = 0;
 void moving(){
     if(robot[down]==1)robot[down]=0;
     int idx=down;
-    for(int i = 0; i<n; i++)
+    
+    while(idx!=up)
     {
         int next = idx;
         idx--;
@@ -75,15 +76,6 @@ void solution(){
             }
 
         }
-        
-        // 2  3 4 5 6
-        // 1 10 9 8 7
-
-        // 6 7 8 9 10
-        // 5 4 3 2 1
-
-        // 7 8 9 10 1
-        // 6 5 4 3  2 
 
         if(cnt>=k) return;
         answer++;
