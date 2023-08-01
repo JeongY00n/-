@@ -11,13 +11,13 @@ using namespace std;
 */
 
 int n,d,k,c;
-int susi[3000000];
+int sushi[3000000];
 int eat_cnt[3001];
 int answer;
 void init(){
     cin>>n>>d>>k>>c;
     for(int i = 0; i<n; i++)
-        cin>>susi[i];
+        cin>>sushi[i];
 }
 
 // 2 9 25 7 7 9 2 30
@@ -31,7 +31,7 @@ void solution(){
     // 인덱스 0 부터의 구간 합 계산
     for(int i = 0; i<k; i++)
     {
-        num = susi[i];
+        num = sushi[i];
         if(eat_cnt[num]==0)cnt++;
         eat_cnt[num]++;
     }
@@ -42,11 +42,11 @@ void solution(){
     // 앞에서 계산한 구간합에 대해 한 칸씩 이동하면서 최댓값 계산
     while(left<=n)
     {
-        num = susi[left];
+        num = sushi[left];
         eat_cnt[num]--;
         if(eat_cnt[num]==0)cnt--;
 
-        num = susi[(left+k)%n];
+        num = sushi[(left+k)%n];
         eat_cnt[num]++;
         if(eat_cnt[num]==1)cnt++;
 
