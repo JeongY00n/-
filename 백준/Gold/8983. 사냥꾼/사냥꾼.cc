@@ -14,7 +14,6 @@ void init(){
         cin>>animal[i].first>>animal[i].second; 
 
     sort(shoot, shoot+m);
-    sort(animal, animal+n);
 }
 
 void solution(){
