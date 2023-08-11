@@ -85,11 +85,12 @@ void solution(int n, int cnt){
     else if(n>=100)
     {
         int x=1;
+        // x는 n의 자릿수보다 한 자릿수 더 크게 종료됨
+        // int의 범위를 벗어날 수도 있으므로 x<=n/10으로 계산
         for(x = 1; x<=n/10; x*=10)
             ;
 
         // 세 자리 수 나누기
-        // x는 n의 자릿수보다 한 자릿수 더 크게 종료됨
         for(int i = x; i>=100; i/=10)
         {
             for(int j = i/10; j>=10; j/=10)
