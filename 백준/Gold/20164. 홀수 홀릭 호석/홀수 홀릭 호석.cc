@@ -85,12 +85,12 @@ void solution(int n, int cnt){
     else if(n>=100)
     {
         int x=1;
-        for(x = 1; x<n; x*=10)
+        for(x = 1; x<=n/10; x*=10)
             ;
-            
+
         // 세 자리 수 나누기
         // x는 n의 자릿수보다 한 자릿수 더 크게 종료됨
-        for(int i = x/10; i>=100; i/=10)
+        for(int i = x; i>=100; i/=10)
         {
             for(int j = i/10; j>=10; j/=10)
             {
@@ -100,7 +100,6 @@ void solution(int n, int cnt){
         }
     }
 }
-
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
