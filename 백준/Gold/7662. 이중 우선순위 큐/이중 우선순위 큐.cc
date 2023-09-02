@@ -69,6 +69,7 @@ void solution(){
         cin>>op>>num;
         if(op=='I') insert(num, i);
         if(op=='D') del(num);
+        //if(cnt==0)init();  => 이미 앞에서 삭제된 값은 while문으로 제거해주므로 필요없음
     }
 }
 
