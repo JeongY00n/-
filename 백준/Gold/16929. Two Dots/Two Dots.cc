@@ -9,8 +9,9 @@ using namespace std;
 int n,m;
 char map[50][50];
 int visited[50][50];
-int fy[] = {-1,1,0,0};
-int fx[] = {0,0,-1,1};
+int dir[5];
+int fy[] = {0,-1,0,1,0};
+int fx[] = {0,0,-1,0,1};
 int cnt[26];
 int circle;
 
@@ -25,32 +26,31 @@ void init(){
         }
     }
 }
+void solution(int y, int x, int d){
+    if(circle)return;
 
-void solution(int starty, int startx, int y, int x, int sum){
-    
-    if(starty == y && startx == x && sum>=4)
+    visited[y][x]=1;
+    for(int i = 1; i<=4; i++)
     {
-        circle=1;
-        return;
-    }
+        if(i%2 == d%2 && i!=d)continue;
 
-    for(int i = 0; i<4; i++)
-    {
         int ny = y + fy[i];
         int nx = x + fx[i];
 
         if(ny<0||nx<0||ny>=n||nx>=m)continue;
-        if(map[ny][nx]!=map[starty][startx])continue;
-        if(visited[ny][nx]==1)continue;
-        visited[ny][nx]=1;
+        if(map[ny][nx]!=map[y][x])continue;
+        if(visited[ny][nx]==1)
+        {
+            circle = 1;
+            break;
+        }
 
-        solution(starty, startx, ny, nx, sum+1);
-
-        visited[ny][nx]=0;
+        solution(ny, nx, i);
     }
+    visited[y][x]=0;
 
-    
 }
+
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
@@ -62,8 +62,8 @@ int main(){
         for(int j = 0; j<m; j++)
         {
             if(cnt[map[i][j]-'A']<4)continue;
-
-            solution(i,j, i,j, 0);
+            solution(i,j,-1);
+            
             if(circle)
             {
                 cout<<"Yes";
