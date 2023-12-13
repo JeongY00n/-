@@ -1,14 +1,12 @@
 #include<iostream>
-#include<vector>
 #include<queue>
-#include<algorithm>
 #include<string.h>
 using namespace std;
 
-struct INFO{
+struct Coord{
     int y, x, size, time;
 
-    bool operator<(const INFO&other)const{
+    bool operator<(const Coord&other)const{
 
         if(time<other.time) return false;
         if(time>other.time) return true;
@@ -24,7 +22,7 @@ struct INFO{
 };
 int n, map[20][20];
 int fish;
-INFO shark;
+Coord shark;
 int cnt;
 void init(){
     cin>>n;
@@ -48,27 +46,21 @@ int fy[]={-1,0,0,1};
 int fx[]={0,-1,1,0};
 
 void bfs(){
-    priority_queue<INFO> q;
-    priority_queue<INFO> pq;
+    priority_queue<Coord> q;
+    priority_queue<Coord> pq;
     q.push(shark);
 
     int visited[20][20]={0};
     visited[shark.y][shark.x]=1;
 
     while(!q.empty()){
-        INFO now = q.top();
+        Coord now = q.top();
         q.pop();
 
         int y = now.y;
         int x = now.x;
         int size = now.size;
 
-        // 물고기를 먹은 경우
-        // 먹은 물고기 갯수에 +1
-        // 살아있는 물고기 갯수에 -1
-        // 만약 먹을 물고기 갯수가 아기상어의 크기와 같다면 size에 +1
-        // 물고기 위치의 값 0으로 갱신
-        // 상어의 정보 갱신
         if(!pq.empty())
         {
             if(pq.top().time <= now.time) {
@@ -115,7 +107,6 @@ void bfs(){
             if(map[ny][nx] < size && map[ny][nx]!=0)
                 pq.push({ny,nx,size,now.time+1});
             
-
             q.push({ny,nx,size, now.time+1});
         }
 
