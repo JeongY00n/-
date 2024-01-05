@@ -8,7 +8,6 @@ using namespace std;
     string answer[1001][1001];을 사용하면 저장하는 과정에서 그 이전 string 자체를 복사해오고 뒤에 하나를 덧 붙이는 식으로 짜여지므로
     시간이  O(n^3)의 시간복잡도를 가지게 된다.
 */
-vector<char> answer[1001][1001];
 
 int main(){
     ios::sync_with_stdio(0);
