@@ -12,7 +12,7 @@ string solution(string play_time, string adv_time, vector<string> logs) {
         int from = stoi(x.substr(0, 2)) * 3600 + stoi(x.substr(3, 2)) * 60 + stoi(x.substr(6, 2));
         int to = stoi(x.substr(9, 2)) * 3600 + stoi(x.substr(12, 2)) * 60 + stoi(x.substr(15, 2));
 
-        for (int i = from + 1; i <= to; i++)
+        for (int i = from; i < to; i++)
             arr[i]++;
     }
 
@@ -21,13 +21,13 @@ string solution(string play_time, string adv_time, vector<string> logs) {
 
     long long int sum = 0;
     long long int maximum = -1;
-    int index = 1;
+    int index = 0;
 
-    for (int i = 1; i <= length; i++)
+    for (int i = 0; i < length; i++)
         sum += arr[i];
     maximum = sum;
 
-    for (int i = 2; i <= (playtime - length + 1); i++)
+    for (int i = 1; i <= playtime - length; i++)
     {
         sum += (long long int)(arr[i + length - 1] - arr[i - 1]);
 
@@ -39,9 +39,6 @@ string solution(string play_time, string adv_time, vector<string> logs) {
     }
 
 
-
-
-    index--;
     string answer;
     int hour, minute, second;
 
