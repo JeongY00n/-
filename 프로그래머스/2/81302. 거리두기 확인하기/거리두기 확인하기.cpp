@@ -16,7 +16,7 @@ int fy[]={-1,1,0,0};
 int fx[]={0,0,-1,1};
 int visited[5][5];
 int flag=0;
-void solution(string* map, int y1, int x1, int y2, int x2)
+void solution(vector<string> map, int y1, int x1, int y2, int x2)
 {
     if(flag)return;
     if(abs(y1-y2)+abs(x1-x2)>2)
@@ -54,18 +54,16 @@ vector<int> solution(vector<vector<string>> places) {
     
     for(int i = 0; i<5; i++)
     {
-        string map[5]={};
         vector<pair<int, int>> yx;
+        
         for(int j = 0; j<5; j++)
         {
-            map[j]=places[i][j];
             for(int p=0; p<5; p++)
             {
                 if(places[i][j][p]=='P')
                     yx.push_back({j,p});
             }
         }
-        cout<<"\n";
         if(yx.size()==0)
             answer.push_back(1);
         else
@@ -78,7 +76,7 @@ vector<int> solution(vector<vector<string>> places) {
                 // 시작 좌표 초기세팅
                 visited[yx[p].first][yx[p].second]=1;
                 
-                solution(map, yx[p].first, yx[p].second, yx[p].first, yx[p].second);
+                solution(places[i], yx[p].first, yx[p].second, yx[p].first, yx[p].second);
                 if(flag)break;
                 
                 // memset(visited,0,sizeof(visited));
