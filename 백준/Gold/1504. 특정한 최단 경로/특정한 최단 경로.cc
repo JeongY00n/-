@@ -62,19 +62,15 @@ int main(){
     init();
 
     long long first1, first2, second, third1, third2;
-    // 1번에서 v1, v2번까지의 최단 경로
     solution(1);
     first1 = visited[v1];
     first2 = visited[v2];
-    // v1에서 v2의 최단 경로
     solution(v1);
     second = visited[v2];
-    // n번에서 v1, v2번까지의 최단 경로
     solution(n);
     third1 = visited[v1];
     third2 = visited[v2];
     
-    // 1->v1->v2->n or 1->v2->v1->n 
     long long cost1 = min(first1+third2, first2+third1);
 
     if(cost1>=4e9||second>=4e9)
