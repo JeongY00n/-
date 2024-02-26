@@ -8,7 +8,8 @@ int check[11];
 int n,maxi=0;
 vector<int> sumsum;
 vector<int> answer;
-void sumOP(int sum, vector<int> v, int cnt, vector<vector<int>> dice)
+// 조합으로 이뤄진 주사위들로 만들 수 있는 합 계산
+void findSum(int sum, vector<int> v, int cnt, vector<vector<int>> dice)
 {
     if(cnt==n/2)
     {
@@ -19,11 +20,11 @@ void sumOP(int sum, vector<int> v, int cnt, vector<vector<int>> dice)
         
     for(int i = 0; i<6; i++)
     {
-        sumOP(sum+dice[v[cnt]-1][i],v,cnt+1,dice);
+        findSum(sum+dice[v[cnt]-1][i],v,cnt+1,dice);
     }
 
 }
-
+// A의 값이 더 큰 경우를 카운팅
 int calc(vector<int> sumA, vector<int> sumB){
     int cnt=0;
     for(int i = 0; i<sumA.size(); i++)
@@ -39,7 +40,7 @@ int calc(vector<int> sumA, vector<int> sumB){
     
     return cnt;
 }
-
+// A와 B의 주사위 조합으로 A가 이길 확률이 높은 경우를 answer에 저장
 void checkAB(vector<vector<int>> dice){
     
     vector<int> A,B;
@@ -52,22 +53,17 @@ void checkAB(vector<vector<int>> dice){
     }
     
     sumsum.clear();
-    sumOP(0,A,0,dice);
+    findSum(0,A,0,dice);
     vector<int> sumA = sumsum;
-    //cout<<A[0]<<","<<A[1]<<" "<<B[0]<<","<<B[1]<<"\n";
-    // for(int i = 0; i<sumA.size(); i++)
-    //     cout<<sumA[i]<<" ";
-    // cout<<"\n";
+
     sumsum.clear();
-    sumOP(0,B,0,dice);
+    findSum(0,B,0,dice);
     vector<int> sumB=sumsum;
-    // for(int i = 0; i<sumA.size(); i++)
-    //     cout<<sumB[i]<<" ";
-    // cout<<"\n";
+
     sort(sumA.begin(),sumA.end());
     sort(sumB.begin(),sumB.end());
     int result = calc(sumA, sumB);
-    // cout<<result<<"\n";
+
     if(maxi<result)
     {
         maxi = result;
@@ -77,7 +73,7 @@ void checkAB(vector<vector<int>> dice){
     
 }
 
-void dfs(int idx, int cnt,vector<vector<int>> dice)
+void Combine(int idx, int cnt,vector<vector<int>> dice)
 {
     if(cnt==n/2)
     {
@@ -88,14 +84,14 @@ void dfs(int idx, int cnt,vector<vector<int>> dice)
     for(int i = idx; i<=n; i++)
     {
         check[i]=1;
-        dfs(i+1, cnt+1, dice);
+        Combine(i+1, cnt+1, dice);
         check[i]=0;
     }
 }
 vector<int> solution(vector<vector<int>> dice) {
     
     n = dice.size();
-    dfs(1,0,dice);
+    Combine(1,0,dice);
     
     return answer;
 }
