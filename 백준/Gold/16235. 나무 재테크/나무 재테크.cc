@@ -26,9 +26,7 @@ void init(){
     }
     
 }
-vector<pair<int, pair<int, int>>> dead;
-void spring(){
-    dead.clear();
+void spring_summer(){
     for(int y = 1; y<=N; y++)
     {
         for(int x = 1; x<=N; x++)
@@ -43,12 +41,11 @@ void spring(){
                     map[y][x]-=tree[y][x][n];
                     tree[y][x][n]++;
                 }
-                // 먹을 수 없는 경우 죽음
+                // 먹을 수 없는 경우 죽음 => 양분이 되어버림
                 else
                 {
-                    // 양분을 먹을 수 없는 나무가 등장하면 남은 나무들도 양분을 먹을 수 없기 때문에 한 번에 dead 벡터에 저장하고 반복문 종료
                     for(int m=n; m<tree[y][x].size(); m++)
-                        dead.push_back({tree[y][x][m],{y,x}});
+                        map[y][x]+=tree[y][x][m]/2;
 
                     tree[y][x].erase(tree[y][x].begin()+n,tree[y][x].end());
                     break;
@@ -57,16 +54,7 @@ void spring(){
         }
     }
 }
-void summer(){
-    for(int n=0; n<dead.size(); n++)
-    {
-        int y = dead[n].second.first;
-        int x = dead[n].second.second;
-        int age = dead[n].first;
 
-        map[y][x]+=age/2;
-    }
-}
 void fall(){
     int fy[]={-1,-1,-1,0,0,1,1,1};
     int fx[]={-1,0,1,-1,1,-1,0,1};
@@ -105,10 +93,8 @@ void solution(){
 
     for(int i = 0; i<K; i++)
     {
-        // 봄
-        spring();
-        //
-        summer();
+        // 봄 + 여름
+        spring_summer();
         // 가을
         fall();
         // 겨울
