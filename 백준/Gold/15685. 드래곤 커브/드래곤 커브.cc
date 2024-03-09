@@ -31,40 +31,33 @@ void dragon(int x, int y, int d, int g){
     // 드래곤 세대
     for(int i = 1; i<=g; i++)
     {
+        
         int a=0, b=0;
-        // 상->우
-        if(v[v.size()-1].first-v[v.size()-2].first==0 &&v[v.size()-1].second-v[v.size()-2].second>0)
-           { a=1;b=0; }       
-        // 우->하
-        else if(v[v.size()-1].first-v[v.size()-2].first<0&&v[v.size()-1].second-v[v.size()-2].second==0)
-            {a=0;b=1;}       
-        // 하->좌
-        else if(v[v.size()-1].first-v[v.size()-2].first==0&&v[v.size()-1].second-v[v.size()-2].second<0)
-            {a=-1;b=0;  }      
-        // 좌->상
-        else if(v[v.size()-1].first-v[v.size()-2].first>0&&v[v.size()-1].second-v[v.size()-2].second==0)
-            {a=0;b=-1;}        
 
         int size = v.size();
         // 이전 세대에서 가장 최근에 추가된 좌표 순서대로 다음 세대의 좌표를 이어나간다
         for(int j = size-1; j>0; j--)
         {
-            // 상->우
+            // 가장 최근 좌표가 이전 좌표로부터 아래에 있는 경우
+            // 새로운 좌표는 가장 최근 좌표의 오른쪽에 생성된다
             if(v[j].first-v[j-1].first==0 &&v[j].second-v[j-1].second>0)
             {
                 a=1;b=0;
             }
-            // 우->하
+            // 가장 최근 좌표가 이전 좌표로부터 왼쪽에 있는 경우
+            // 새로운 좌표는 가장 최근 좌표의 아래에 생성된다
             else if(v[j].first-v[j-1].first<0&&v[j].second-v[j-1].second==0)
             {
                 a=0;b=1;
             }
-            // 하->좌
+            // 가장 최근 좌표가 이전 좌표로부터 위에 있는 경우
+            // 새로운 좌표는 가장 최근 좌표의 왼쪽에 생성된다
             else if(v[j].first-v[j-1].first==0&&v[j].second-v[j-1].second<0)
             {
                 a=-1;b=0;
             }
-            // 좌->상
+            // 가장 최근 좌표가 이전 좌표로부터 오른쪽에 있는 경우
+            // 새로운 좌표는 가장 최근 좌표의 왼쪽에 생성된다
             else if(v[j].first-v[j-1].first>0&&v[j].second-v[j-1].second==0)
             {
                 a=0;b=-1;
@@ -106,11 +99,6 @@ int main(){
 
     init();
     findCnt();
-    // for(int i = 0; i<10; i++)
-    // {
-    //     for(int j = 0; j<10; j++)
-    //         cout<<map[i][j];
-    //     cout<<"\n";
-    // }
+
     return 0;
 }
