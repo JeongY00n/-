@@ -1,21 +1,32 @@
 #include<iostream>
-#include<algorithm>
+#include<queue>
 using namespace std;
 
 
-int N, num[2250000]={0};
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int N;
     cin>>N;
+    priority_queue<int,vector<int>, greater<int>> pq;
     for(int i = 0; i<N*N; i++)
-        cin>>num[i];
+    {
+        int num; cin>>num;
+        if(pq.size()<N)
+            pq.push(num);
+        else
+        {
+            if(pq.top()<num)
+            {
+                pq.pop();
+                pq.push(num);
+            }
+        }
+    }
 
-    sort(num,num+N*N,greater<>());
-
-    cout<<num[N-1];
+    cout<<pq.top();
 
     return 0;
 }
