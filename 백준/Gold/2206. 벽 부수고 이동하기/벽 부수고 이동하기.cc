@@ -3,17 +3,11 @@
 using namespace std;
 
 /*
-    다익스트라
-    벽을 부순지에 대한 여부와 이동한 칸의 수를 저장
-
+    벽을 부쉈는지 여부와 이동한 칸의 수를 저장
 */
 
 struct Coord{
     int y,x,cost,temp; // 현재좌표, 이동한 칸의 수, 벽을 부쉈는지
-
-    bool operator<(const Coord&other)const{
-        return cost>other.cost;
-    }
 };
 int N,M;
 char map[1000][1000];
@@ -23,18 +17,18 @@ void init(){
         for(int j = 0; j<M; j++)
             cin>>map[i][j];
 }
-void dijkstra(){
-    priority_queue<Coord> pq;
-    pq.push({0,0,1,0});
+void bfs(){
+    queue<Coord> q;
+    q.push({0,0,1,0});
 
     int visited[2][1000][1000]={0}; //부순벽의 갯수, 좌표y,x
     visited[0][0][0]=1; 
 
     int dy[]={-1,1,0,0};
     int dx[]={0,0,-1,1};
-    while(!pq.empty()){
-        Coord now = pq.top();
-        pq.pop();
+    while(!q.empty()){
+        Coord now = q.front();
+        q.pop();
 
         int y = now.y;
         int x = now.x;
@@ -57,7 +51,7 @@ void dijkstra(){
             if(map[ny][nx]=='1')
             {
                 if(temp==0)
-                pq.push({ny,nx,cost+1,1});
+                q.push({ny,nx,cost+1,1});
                 visited[1][ny][nx]=1;
                 continue;
             }
@@ -70,7 +64,7 @@ void dijkstra(){
             //     return;
             // }
 
-            pq.push({ny,nx,cost+1,temp});
+            q.push({ny,nx,cost+1,temp});
 
         }
     }
@@ -83,7 +77,7 @@ int main(){
     cout.tie(0);
 
     init();
-    dijkstra();
+    bfs();
 
     return 0;
 }
