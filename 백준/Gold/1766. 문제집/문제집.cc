@@ -25,18 +25,17 @@ void init(){
     }
 }
 
-void solution(){
-    while(!q.empty()){
-        int idx = q.top();
-        q.pop();
-        while(!pq[idx].empty()){
-            cnt[pq[idx].top()]--;
-            if(!cnt[pq[idx].top()])
-                q.push(pq[idx].top());
-            pq[idx].pop();
-        }
-        cout<<idx<<" ";
+void dfs(int idx){
+    cout<<idx<<" ";
+    q.pop();
+    while(!pq[idx].empty()){
+        cnt[pq[idx].top()]--;
+        if(!cnt[pq[idx].top()])
+            q.push(pq[idx].top());
+        pq[idx].pop();
     }
+    if(q.empty())return;
+    dfs(q.top());
 }
 int main(){
     ios::sync_with_stdio(false);
@@ -44,7 +43,7 @@ int main(){
     cout.tie(0);
 
     init();
-    solution();
+    dfs(q.top());
 
     return 0;
 }
