@@ -12,8 +12,6 @@ using namespace std;
 
 struct INFO{
     int cnt, num;
-    
-    
 };
 bool cmp(INFO a, INFO b) {
     if(a.cnt==b.cnt)
@@ -29,17 +27,12 @@ vector<int> solution(int e, vector<int> starts) {
     fill(cnt, cnt+e+1, 0);
     
     for(int i = 1; i<=e; i++)
-    {
         for(int j = i; j<=e; j+=i)
-        {
             cnt[j]++;
-        }
-            
-    }
+        
     for(int i = 1; i<=e; i++)
-    {
         v.push_back({cnt[i],i});
-    }
+    
         
     
     sort(v.begin(), v.end(), cmp);
