@@ -1,5 +1,6 @@
 #include<iostream>
 #include<algorithm>
+#include<vector>
 
 using namespace std;
 
@@ -7,15 +8,22 @@ int N;
 long long K;
 long long map[1000001]; // 점의 개수(2,3,4,5 : 4개)가 아니라 길이를 계산 (2,3,4,5 : 3) 
 int maxi=0, mini=1e9;
+vector<pair<int, int>> v;
 void init(){
     cin>>N>>K;
     for(int i = 0; i<N; i++)
     {
         int a,b; cin>>a>>b;
-        for (int j = a; j<b; j++) map[j]++;
+        map[a]++;
+        map[b]--;
         
         maxi=max(maxi, b);
         mini=min(mini, a);
+    }
+
+    for(int i = 1; i<=maxi; i++)
+    {
+        map[i]+=map[i-1];
     }
 }
 void solution(){
