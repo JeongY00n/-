@@ -16,20 +16,17 @@ using namespace std;
 
 struct Edge{
     int to, time;
+
+    // bool operator<(const Edge&other) const{
+    //     return time>other.time;
+    // }
 };
 
-struct cmp{
-    bool operator()(Edge a, Edge b){
-        if(a.time < b.time)return false;
-        if(a.time > b.time)return true;
-        return false;
-    }
-};
 
 int n,m,x;
 vector<Edge> v[1001];
 int go_party[1001], go_home[1001];
-int mini[1001][1001];
+int visited[1001][1001];
 void init(){
     cin>>n>>m>>x;
     for(int i = 0; i<m; i++){
@@ -37,13 +34,13 @@ void init(){
         cin>>from>>to>>time;
         v[from].push_back({to, time});
     }
-    fill(&mini[1][1], &mini[1000][1000], 2e9);
+    fill(&visited[1][1], &visited[1000][1001], 2e9);
 }
 void solution(int to){
-    priority_queue<Edge, vector<Edge>, cmp> q;
+    queue<Edge> q;
     q.push({to, 0});
     while(!q.empty()){
-        Edge now = q.top();
+        Edge now = q.front();
         q.pop();
 
         int from = now.to;
@@ -52,9 +49,9 @@ void solution(int to){
 
         for(int i = 0; i<v[from].size(); i++){
 
-            if(mini[to][v[from][i].to] > time+v[from][i].time)
+            if(visited[to][v[from][i].to] > time+v[from][i].time)
             {
-                mini[to][v[from][i].to]=time+v[from][i].time;
+                visited[to][v[from][i].to]=time+v[from][i].time;
                 q.push({v[from][i].to, time+v[from][i].time});
             }
             
@@ -70,13 +67,14 @@ int main(){
     int answer = 0;
     init();
 
-    for(int i =1; i<=n; i++)    
+    for(int i =1; i<=n; i++)
         solution(i);
+    
 
     for(int i = 1; i<=n; i++)
     {
         if(i!=x)
-            answer = max(answer, mini[i][x]+mini[x][i]);
+            answer = max(answer, visited[i][x]+visited[x][i]);
     }
     
     cout<<answer;
