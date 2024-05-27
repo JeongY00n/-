@@ -25,11 +25,8 @@ void coloring(int now, int c, int ncnt){
 //    cout<<now<<" "<<answer<<"\n";
     if(ncnt==n)
     {
-        end_flag=1;
         return;
     }
-    if(end_flag)
-        return;
 
     for(int i = 0; i<node[now].size(); i++)
     {
@@ -46,6 +43,7 @@ void coloring(int now, int c, int ncnt){
 }
 
 void solution(){
+    // 루트노드의 색상이 흰색이 아닌 경우
     if(color[1]!=0)
         answer++;
     visited[1]=1;
