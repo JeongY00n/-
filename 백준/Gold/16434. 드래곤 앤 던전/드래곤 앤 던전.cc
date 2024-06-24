@@ -25,6 +25,8 @@ long long playing(long long maxi){
         //몬스터
         if(room[i].t==1)
         {
+            //반복문으로 돌리지 말고, 
+            //나머지 계산으로 몬스터를 죽일 수 있는지에 대한 여부 파악
             long long hp=room[i].h;
             hp%=atk;
             cur-=(room[i].a*(room[i].h/atk));
@@ -57,7 +59,7 @@ void solution(){
         if(result==1)
         {
             // cout<<answer<<" ";
-            answer=mid;
+            //answer=mid;
             right=mid;
         }
         //작은 경우
@@ -65,7 +67,7 @@ void solution(){
             left=mid+1;
         
     }
-    cout<<answer;
+    cout<<right;
 }
 int main(){
     ios::sync_with_stdio(false);
