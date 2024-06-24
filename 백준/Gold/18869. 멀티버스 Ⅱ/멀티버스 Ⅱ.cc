@@ -8,6 +8,7 @@ using namespace std;
     균등한 우주 쌍 찾기
     idx를 같이 저장하고 값에 대해서 정렬
 */
+
 int n,m;
 vector<pair<int,int>> planet[10000];
 void init(){
@@ -31,7 +32,6 @@ void solution(){
         for(int j = i+1; j<m; j++)
         {
             int flag=0;
-            if(visited[i][j]==1)continue;
 
             for(int a = 0; a<n; a++)
             {
@@ -64,8 +64,6 @@ void solution(){
             if(!flag)
             {
                 cnt++;
-                visited[i][j]=1;
-                visited[j][i]=1;
             }
         }
     }
