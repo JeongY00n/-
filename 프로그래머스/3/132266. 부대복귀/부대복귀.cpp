@@ -16,10 +16,10 @@ vector<int> solution(int n, vector<vector<int>> roads, vector<int> sources, int 
     }
     
     queue<pair<int,int>> q;
+    q.push({destination,0});
+    
     int visited[100001]={0};
     fill(visited,visited+n+1,-1);
-    
-    q.push({destination,0});
     visited[destination]=0;
     
     while(!q.empty()){
@@ -29,14 +29,15 @@ vector<int> solution(int n, vector<vector<int>> roads, vector<int> sources, int 
         for(int i = 0; i<node[from].size(); i++){
             if(visited[node[from][i]]!=-1&&visited[node[from][i]]<=time+1)continue;
             visited[node[from][i]]=time+1;
+            
             q.push({node[from][i],time+1});
         }
     }
     
+    
     for(int i = 0; i<sources.size(); i++)
-    {
         answer.push_back(visited[sources[i]]);
-    }
+    
     
     return answer;
 }
